@@ -34,6 +34,7 @@ const customerProfileSchema = new mongoose.Schema({
           lat: Number,
           lng: Number,
         },
+        deliveryInstructions: String,
       }
     ],
     paymentMethods: [
@@ -51,7 +52,6 @@ const customerProfileSchema = new mongoose.Schema({
     ],
     preferences: {
       language: { type: String, default: 'en' },
-      deliveryInstructions: String,
     },
     createdAt: {
       type: Date,
