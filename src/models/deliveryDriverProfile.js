@@ -31,6 +31,18 @@ const deliveryDriverProfileSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  licenseDocument: {
+    type: String,
+    required: true,
+  },
+  nicNumber: {
+    type: String,
+    required: true,
+  },
+  nicDocument: {
+    type: String,
+    required: true,
+  },
   status: {
     type: String,
     enum: ['active', 'inactive', 'suspended'],

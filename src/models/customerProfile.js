@@ -19,10 +19,6 @@ const customerProfileSchema = new mongoose.Schema({
         type: String,
        required: true 
      },
-    phone: {
-      type: String,
-      required: true,
-    },
     addresses: [
       {
         label: { type: String, default: 'Home' },
