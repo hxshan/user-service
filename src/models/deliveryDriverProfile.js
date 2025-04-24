@@ -76,4 +76,4 @@ const deliveryDriverProfileSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('DeliveryDriverProfile', deliveryDriverProfileSchema);
+export default mongoose.model('DeliveryDriverProfile', deliveryDriverProfileSchema);
