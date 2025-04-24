@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-
+import mongoose from "mongoose";
 const customerProfileSchema = new mongoose.Schema({
     userId: {
       type: String,
@@ -55,4 +54,4 @@ const customerProfileSchema = new mongoose.Schema({
     },
   });
   
-  module.exports = mongoose.model('CustomerProfile', customerProfileSchema);
+ export default mongoose.model('CustomerProfile', customerProfileSchema);

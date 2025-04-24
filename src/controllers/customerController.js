@@ -1,5 +1,5 @@
-import customerProfile from "../models/customerProfile";
-import { errorEnum } from "../utils/errorEnum";
+import CustomerProfile from "../models/customerProfile.js";
+import { errorEnum } from "../utils/errorEnum.js";
 
 const getCustomerProfile = async (req, res) => {
   const id = req.params.id;
@@ -98,5 +98,4 @@ export default {
   updateCustomerProfile,
   getCustomerAdresses,
   updateCustomerAdress
-
 };

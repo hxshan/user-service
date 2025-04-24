@@ -1,10 +1,9 @@
 import express from "express"
-import customerController from "../controllers/customerController";
+import customerController from "../controllers/customerController.js";
 
 const router = express.Router();
 
-router.route('/profile')
-    .post(customerController.addCustomerProfile)
+router.post('/profile',customerController.addCustomerProfile)
     
 router.route('/profile/:id')
     .get(customerController.getCustomerProfile)
