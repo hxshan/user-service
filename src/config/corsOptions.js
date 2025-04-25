@@ -1,8 +1,7 @@
 const allowedOrigins = [
     "http://localhost:3000",
-    "http://localhost:8000",   
-    "http://localhost:8000/api",   
-    "http://localhost:8000/api/user",   
+    "http://localhost:8000",    
+    "http://localhost:5173"  
   ];
   
   export const corsOptions = {

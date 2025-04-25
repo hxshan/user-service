@@ -31,7 +31,7 @@ const addCustomerProfile = async (req, res) => {
     return res.status(404).json({ message: errorEnum.LASTNAME_REQUIRED });
 
   try {
-    const profile = new customerProfile({
+    const profile = new CustomerProfile({
       userId,
       phone,
       firstName,
@@ -47,7 +47,7 @@ const addCustomerProfile = async (req, res) => {
     //================================
     return res.status(200).json({ message: "Profile Saved" });
   } catch (err) {
-    console.error("Error creating profile:", error.message);
+    console.error("Error creating profile:", err.message);
     return res.status(500).json({ message: errorEnum.SERVER_ERROR });
   }
 };

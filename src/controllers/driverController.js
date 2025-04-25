@@ -73,8 +73,5 @@ const getDriverProfile = async (req, res) => {
   export default {
     getDriverProfile,
     addDriverProfile,
-    updateCustomerProfile,
-    getCustomerAdresses,
-    updateCustomerAdress
   };
   
