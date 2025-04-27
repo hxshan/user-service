@@ -43,7 +43,7 @@ const getDriverProfile = async (req, res) => {
     if (!licenseDocument || !nicDocument) return res.status(400).json({message:errorEnum.DOCUMENTS_REQUIRED });
   
     try {
-        const profile = new driverProfile({
+        const profile = new deliveryDriverProfile({
             userId,
             phone,
             firstName,
@@ -65,7 +65,7 @@ const getDriverProfile = async (req, res) => {
       //================================
       return res.status(200).json({ message: "Driver profile saved" });
     } catch (err) {
-      console.error("Error creating profile:", error.message);
+      console.error("Error creating profile:", err.message);
       return res.status(500).json({ message: errorEnum.SERVER_ERROR });
     }
   };

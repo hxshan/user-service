@@ -20,7 +20,7 @@ const deliveryDriverProfileSchema = new mongoose.Schema({
   vehicle: {
     type: {
       type: String,
-      enum: ['bike','bicycle','car', 'scooter','other'],
+      enum: ['motorcycle','bicycle','car', 'scooter','van','truck','other'],
       required: true,
     },
     plateNumber: { type: String },
