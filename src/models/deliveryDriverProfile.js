@@ -26,6 +26,9 @@ const deliveryDriverProfileSchema = new mongoose.Schema({
     plateNumber: { type: String },
     color: { type: String },
   },
+  profilePicUrl: {
+    type: String,
+  },
   licenseNumber: {
     type: String,
     required: true,

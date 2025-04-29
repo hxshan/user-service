@@ -8,9 +8,12 @@ router.post('/profile',upload.fields([
     { name: 'licenseDocument', maxCount: 1 },
     { name: 'nicDocument', maxCount: 1 }
   ]),driverController.addDriverProfile)
-    
-router.route('/profile/:id')
-    .get(driverController.getDriverProfile)
+  
+  router.put('/profile/:id',upload.fields([
+    { name: 'profilePicture', maxCount: 1 }
+  ]),driverController.editDriverProfile)
+  
+router.get('/profile/:id',driverController.getDriverProfile)
 
     
 // router.route('/address/:id')

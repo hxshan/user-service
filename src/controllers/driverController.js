@@ -69,9 +69,54 @@ const getDriverProfile = async (req, res) => {
       return res.status(500).json({ message: errorEnum.SERVER_ERROR });
     }
   };
+
+  const editDriverProfile = async (req, res) => {
+    const {id} = req.params
+    const {
+        phone,
+        firstName,
+        lastName,
+        vehicle } = req.body;
+        const profilePicture = req.files?.profilePicture?.[0]?.filename;
+    if (!id)
+      return res.status(404).json({ message: errorEnum.USERID_REQUIRED });
+    if (!phone)
+      return res.status(404).json({ message: errorEnum.PHONE_REQUIRED });
+    if (!firstName)
+      return res.status(404).json({ message: errorEnum.FIRSTNAME_REQUIRED });
+    if (!lastName)
+      return res.status(404).json({ message: errorEnum.LASTNAME_REQUIRED });
+    try {
+        const profile = await deliveryDriverProfile.findOne({userId:id}).exec();
+        if (!profile) {
+          return res.status(404).json({ message: errorEnum.USER_NOT_FOUND });
+      }
+
+        profile.firstName=firstName;
+        profile.lastName=lastName;
+        profile.phone=phone;
+        if (vehicle) {
+          profile.vehicle = {
+              type: vehicle.type || profile.vehicle.type,
+              plateNumber: vehicle.plateNumber || profile.vehicle.plateNumber
+          };
+      }
+
+        if (profilePicture) {
+            profile.profilePicUrl = profilePicture;
+        }
+
+      await profile.save();
+      return res.status(200).json({ message: "Driver profile saved" });
+    } catch (err) {
+      console.error("Error creating profile:", err.message);
+      return res.status(500).json({ message: errorEnum.SERVER_ERROR });
+    }
+  };
   
   export default {
     getDriverProfile,
     addDriverProfile,
+    editDriverProfile,
   };
   

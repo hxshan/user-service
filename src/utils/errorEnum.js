@@ -1,5 +1,6 @@
 export const errorEnum ={
     USERID_REQUIRED:"User Id is required!",
+    USER_NOT_FOUND:"User Not Found",
     PHONE_REQUIRED:"Valid Phone Number is required!",
     FIRSTNAME_REQUIRED:"First Name is Required!",
     LASTNAME_REQUIRED:"Last Name is Required!",

@@ -1,5 +1,6 @@
 import CustomerProfile from "../models/customerProfile.js";
 import { errorEnum } from "../utils/errorEnum.js";
+import axios from '../config/axios.js'
 
 const getCustomerProfile = async (req, res) => {
   const id = req.params.id;
@@ -7,11 +8,16 @@ const getCustomerProfile = async (req, res) => {
   if (!id) return res.status(404).json({ message: errorEnum.USERID_REQUIRED });
 
   try {
-    const profile = await customerProfile.findOne({ userId: id }).lean().exec();
-    if (!profile) {
+    const [profile,userResponse] =await Promise.all([CustomerProfile.findOne({ userId: id }).lean().exec(),axios.get(`/auth/users/${id}`)]) 
+    if (!profile || !userResponse) {
       return res.status(404).json({ message: errorEnum.USER_NOT_FOUND });
     }
-    return res.status(200).json(profile);
+    const mergedData = {
+      ...profile,
+      user: userResponse.data.user 
+    };
+
+    return res.status(200).json(mergedData);
   } catch (error) {
     console.error("Error fetching profile:", error.message);
     return res.status(500).json({ message: errorEnum.SERVER_ERROR });

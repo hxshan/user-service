@@ -5,9 +5,8 @@ const router = express.Router();
 
 router.post('/profile',customerController.addCustomerProfile)
     
-router.route('/profile/:id')
-    .get(customerController.getCustomerProfile)
-    .put(customerController.updateCustomerProfile)
+router.get('/profile/:id',customerController.getCustomerProfile)
+router.put('/profile/:id',customerController.updateCustomerProfile)
 
     
 router.route('/address/:id')
