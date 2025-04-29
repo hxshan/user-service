@@ -18,6 +18,25 @@ const getDriverProfile = async (req, res) => {
     }
   };
 
+  const UpdateDeliveryCount = async (req, res) => {
+    const id = req.params.id;
+  
+    if (!id) return res.status(404).json({ message: errorEnum.USERID_REQUIRED });
+  
+    try {
+      const profile = await deliveryDriverProfile.findOne({ userId: id }).lean().exec();
+      if (!profile) {
+        return res.status(404).json({ message: errorEnum.USER_NOT_FOUND });
+      }
+      profile.deliveryCount = profile.deliveryCount + 1;
+      await profile.save();
+      return res.status(200).json('Delivery count updates');
+    } catch (error) {
+      console.error("Error fetching profile:", error.message);
+      return res.status(500).json({ message: errorEnum.SERVER_ERROR });
+    }
+  };
+
   const addDriverProfile = async (req, res) => {
     const {userId,
         phone,
@@ -118,5 +137,6 @@ const getDriverProfile = async (req, res) => {
     getDriverProfile,
     addDriverProfile,
     editDriverProfile,
+    UpdateDeliveryCount,
   };
   

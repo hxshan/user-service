@@ -14,6 +14,7 @@ router.post('/profile',upload.fields([
   ]),driverController.editDriverProfile)
   
 router.get('/profile/:id',driverController.getDriverProfile)
+router.put('/profile/:id/delivery',driverController.UpdateDeliveryCount)
 
     
 // router.route('/address/:id')

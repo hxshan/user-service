@@ -65,6 +65,10 @@ const deliveryDriverProfileSchema = new mongoose.Schema({
     type: Number,
     default: 0.0,
   },
+  deliveryCount: {
+    type: Number,
+    default: 0,
+  },
   reviewsCount: {
     type: Number,
     default: 0,

@@ -2,6 +2,15 @@ import CustomerProfile from "../models/customerProfile.js";
 import { errorEnum } from "../utils/errorEnum.js";
 import axios from '../config/axios.js'
 
+const getAllCustomers = async (req, res) => {
+  try {
+    const profiles =await CustomerProfile.find().lean().exec();
+    return res.status(200).json(profiles);
+  } catch (error) {
+    console.error("Error fetching profiles:", error.message);
+    return res.status(500).json({ message: errorEnum.SERVER_ERROR });
+  }
+};
 const getCustomerProfile = async (req, res) => {
   const id = req.params.id;
 
@@ -91,7 +100,21 @@ const updateCustomerProfile = async (req, res) => {
 };
 
 const getCustomerAdresses = async (req, res) => {
+  const id = req.params.id;
 
+  if (!id) return res.status(404).json({ message: errorEnum.USERID_REQUIRED });
+
+  try {
+    const [profile] =await CustomerProfile.findOne({ userId: id }).lean().exec()
+    if (!profile) {
+      return res.status(404).json({ message: errorEnum.USER_NOT_FOUND });
+    }
+  
+    return res.status(200).json(profile.addresses);
+  } catch (error) {
+    console.error("Error fetching Addresses:", error.message);
+    return res.status(500).json({ message: errorEnum.SERVER_ERROR });
+  }
 }
 
 const updateCustomerAdress = async (req, res) => {
@@ -99,6 +122,7 @@ const updateCustomerAdress = async (req, res) => {
 }
 
 export default {
+  getAllCustomers,
   getCustomerProfile,
   addCustomerProfile,
   updateCustomerProfile,
